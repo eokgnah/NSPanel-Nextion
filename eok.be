@@ -11,11 +11,9 @@ persist.save() # save persist file until serial bug fixed
 
 class TftDownloader
     var tcp
-
     var host
     var port
     var file
-
     var s
     var b
     var tft_file_size
@@ -392,7 +390,6 @@ class Nextion : Driver
         end
     end
 end
-
 var nextion = Nextion()
 
 def flash_nextion(cmd, idx, payload, payload_json)
@@ -402,14 +399,12 @@ def flash_nextion(cmd, idx, payload, payload_json)
     tasmota.set_timer(0,task)
     tasmota.resp_cmnd_done()
 end
-
 tasmota.add_cmd('FlashNextion', flash_nextion)
 
 def send_cmd(cmd, idx, payload, payload_json)
     nextion.sendnx(payload)
     tasmota.resp_cmnd_done()
 end
-
 tasmota.add_cmd('Nextion', send_cmd)
 
 def send_cmd2(cmd, idx, payload, payload_json)
@@ -417,8 +412,10 @@ def send_cmd2(cmd, idx, payload, payload_json)
     print payload
     tasmota.resp_cmnd_done()
 end
-
 tasmota.add_cmd('CustomSend', send_cmd2)
+
+###########################################################
+#
 tasmota.cmd("Rule3 1") # needed until Berry bug fixed
 tasmota.cmd("State")
 #
