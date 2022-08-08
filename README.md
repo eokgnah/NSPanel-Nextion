@@ -5,6 +5,6 @@ Soon here will be my Solution for the EU NSPanel with tasmota and data through M
 
 (pls stand by) ;-)
 
-* Custom Cerry-Script (soon)
+* Custom Berry-Script (soon)
 * Example MQTT (soon)
 * Example HMI (soon)
