@@ -1,11 +1,16 @@
 # Nextion Serial Protocol driver by joBr99 + nextion upload protocol 1.2 (the fast one yay) implementation using http range and tcpclient
 # based on;
 # Sonoff NSPanel Tasmota driver v0.47 | code by blakadder and s-hadinger
+# based on;
+# https://github.com/carlosperezc/nspanel
+#
+# uploader broken (at least for ma EU version)
+#
 
 import persist
 var devicename = tasmota.cmd("DeviceName")["DeviceName"]
 persist.tempunit = tasmota.get_option(8) == 1 ? "F" : "C"
-if persist.has("dim")  else   persist.dim = "1"  end
+if persist.has("dim") else persist.dim = "1"  end
 #var publish_topic = persist.has("publishTopic") ? persist.publishTopic : 'home/laval/devices/TASMOTA_CLOCK/requests'
 persist.save() # save persist file until serial bug fixed
 
@@ -21,10 +26,8 @@ class TftDownloader
     var current_chunk_start
     var download_range
 
-
     def init(host, port, file, download_range)
         self.tft_file_size = 0
-
         self.host = host
         self.port = port
         self.file = file
@@ -110,7 +113,6 @@ class TftDownloader
 end
 
 class Nextion : Driver
-
     var ser
     var flash_size
     var flash_mode
@@ -263,7 +265,6 @@ class Nextion : Driver
 
  # commands to populate an empty screen, should be executed when screen initializes
   def screeninit()
-
     # self.send('{"queryInfo":"version"}')
     self.set_clock()
     self.set_weathervianodered()
@@ -276,8 +277,7 @@ class Nextion : Driver
   # sets time and date according to Tasmota local time
   def set_clock()
     import json
-
-   var weekday = {
+      var weekday = {
         0: "So",
         1: "Mo",
         2: "Di",
@@ -286,8 +286,6 @@ class Nextion : Driver
         5: "Fr",
         6: "Sa"
       }
-
-
     var now = tasmota.rtc()
     var time_raw = now['local']
     var nsp_time = tasmota.time_dump(time_raw)
@@ -323,7 +321,6 @@ class Nextion : Driver
     self.sendnx(cmd)
     cmd = 'main.DATE.txt="' + weekday[nsp_time['weekday']] + ' - ' + day + "." + month + "." + str(nsp_time['year'])  + '"'
     self.sendnx(cmd)
- 
     tasmota.resp_cmnd_done()
   end
 
