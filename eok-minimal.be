@@ -220,6 +220,24 @@ def send_cmd2(cmd, idx, payload, payload_json)
 end
 tasmota.add_cmd('CustomSend', send_cmd2)
 
+#### MQTT Test # start
+class mqttConnect
+  def mqtt_data(topic, idx, payload_s, payload_b)
+    print('MQTT Input - topic, idx, payload_s, payload_b')
+	print(topic)
+	print(idx)
+	print(payload_s)
+	print(payload_b)
+	var TEMPERATUR = 'main.temp.txt="' + payload_s + '"'
+	print(TEMPERATUR)
+    #nextion.sendnx('main.temp.txt="-"')
+    print('MQTT end')
+    return(false)
+  end
+end
+tasmota.add_driver(mqttConnect())
+tasmota.cmd("Subscribe dummyEvent, TEST/SetTestVar")
+#### MQTT Test # end
 
 ###########################################################
 #
