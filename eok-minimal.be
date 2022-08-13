@@ -168,6 +168,17 @@ class Nextion : Driver
       var msg = self.ser.read()
       if size(msg) > 0
         print("NSP: Received Raw =", msg)
+        #### check button presses
+        if (msg==bytes('65000B01FFFFFF'))
+          tasmota.publish_result("Touch", "RESULT")
+        end
+        if (msg==bytes('65020200FFFFFF'))
+          tasmota.publish_result("AllesAus", "RESULT")
+        end
+        if (msg==bytes('65020300FFFFFF'))
+          tasmota.publish_result("StartRobot", "RESULT")
+        end
+        ####
         if (self.flash_mode==1)
 	        ## Flashing - deactivated
         else
@@ -220,6 +231,9 @@ def send_cmd2(cmd, idx, payload, payload_json)
 end
 tasmota.add_cmd('CustomSend', send_cmd2)
 
+#### MQTT Test # start
+#### MQTT Test # end
+
 ###########################################################
 #
 tasmota.cmd("Rule3 1") # needed until Berry bug fixed
@@ -239,3 +253,4 @@ tasmota.add_rule("Time#Minute", /-> nextion.set_clock()) # set rule to update cl
 tasmota.add_rule("system#boot", /-> nextion.screeninit())
 tasmota.cmd("TelePeriod")
 print ('initialization finished')
+log("########## STARTED - EOK ##########")
