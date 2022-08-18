@@ -27,3 +27,5 @@ mosquitto_pub -h mqtt.server -u admin -P pass -t "testnextion/cmnd/Nextion" -m "
 
 mosquitto_pub -h mqtt.server -u admin -P pass -t "testnextion/cmnd/Nextion" -m "picq 135,85,30,30,1"  
 mosquitto_pub -h mqtt.server -u admin -P pass -t "testnextion/cmnd/Nextion" -m "picq 135,85,30,30,0"  
+
+![image](https://user-images.githubusercontent.com/21226978/185434431-9192ea8d-8c09-4be8-899a-f831520f326d.png)
