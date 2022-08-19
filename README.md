@@ -1,7 +1,7 @@
 # Nextion  
 NSPanel Nextion - Tasmota - MQTT - ESP32 - custom HMI
 
-Soon here will be my Solution for the EU NSPanel with tasmota and data through MQTT to a selfmade HMI  
+Soon here will be my Solution for the EU NSPanel (and other Nextions) with tasmota and data through MQTT to a selfmade HMI  
 hint.. ;-) - works with ALL Nextion https://nextion.tech/ displays!
 
 * Custom Berry-Script
